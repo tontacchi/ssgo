@@ -36,3 +36,12 @@ func TestLeafToHTMLRawText(t *testing.T) {
 	if got != want { t.Fatalf("got %q, want %q", got, want) }
 }
 
+func TestLeafToHTMLErrorsWithoutValue(t *testing.T) {
+	node := NewLeafNode("p", "", nil)
+
+	_, err := node.ToHTML()
+	if err == nil {
+		t.Fatalf("expected error for empty value")
+	}
+}
+
