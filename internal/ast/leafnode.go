@@ -3,7 +3,6 @@ package ast
 import (
 	"fmt"
 	"slices"
-	"sort"
 	"strings"
 )
 
@@ -37,7 +36,7 @@ func (n LeafNode) ToHTML() (string, error) {
 	// early: no tag -> just the value
 	if n.Tag == "" { return n.Value, nil }
 
-	res := fmt.Sprintf("<%s%s>%s<%s>", n.Tag, propsToHTML(n.Props), n.Value, n.Tag)
+	res := fmt.Sprintf("<%s%s>%s</%s>", n.Tag, propsToHTML(n.Props), n.Value, n.Tag)
 	return res, nil
 }
 
