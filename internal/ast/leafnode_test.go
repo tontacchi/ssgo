@@ -36,6 +36,16 @@ func TestLeafToHTMLRawText(t *testing.T) {
 	if got != want { t.Fatalf("got %q, want %q", got, want) }
 }
 
+func TestLeafToHTMLCode(t *testing.T) {
+	node := NewLeafNode("code", `fmt.Println("hi")`, nil)
+
+	got, err := node.ToHTML()
+	if err != nil { t.Fatalf("Unexpected error: %v", err) }
+
+	want := `<code>fmt.Println("hi")</code>`	
+	if got != want { t.Fatalf("got %q, want %q", got, want) }
+}
+
 func TestLeafToHTMLErrorsWithoutValue(t *testing.T) {
 	node := NewLeafNode("p", "", nil)
 
