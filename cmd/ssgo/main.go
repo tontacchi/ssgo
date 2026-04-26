@@ -1,9 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"ssgo/internal/ast"
+)
 
 func main() {
-	fmt.Println("mdc: started")
+	fmt.Println("ssgo: started")
 
-	fmt.Println("mdc: finished")
+	node := ast.NewLeafNode("a", "click", map[string]string{
+		"href": "https://example.com",
+	})
+	fmt.Println(node.String())
+
+	fmt.Println("ssgo: finished")
 }
