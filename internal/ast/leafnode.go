@@ -40,6 +40,10 @@ func (n LeafNode) ToHTML() (string, error) {
 	return res, nil
 }
 
+func (n LeafNode) String() string {
+	return fmt.Sprintf("LeafNode(%s, %s, %v)", n.Tag, n.Value, n.Props)
+}
+
 
 //------------------------------------------------------------------------------
 // Helper Methods
