@@ -23,3 +23,14 @@ func TestPropsToHTML(t *testing.T) {
 		t.Fatalf("got %q, want %q or %q", actual, want1, want2)
 	}
 }
+
+func TestPropsToHTMLEmpty(t *testing.T) {
+	node := NewHTMLNode("p", "Hello", nil, nil)
+
+	expected, actual := "", node.PropsToHTML()
+
+	if actual != expected {
+		t.Fatalf("actual=%q, expected=%q", actual, expected)
+	}
+}
+
