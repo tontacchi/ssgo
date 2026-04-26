@@ -67,6 +67,15 @@ func TestLeafToHTMLImage(t *testing.T) {
 }
 
 
+func TestLeafStringBasic(t *testing.T) {
+	node := NewLeafNode("p", "hello", nil)
+
+	got  := node.String()
+	want := "LeafNode(p, hello, map[])"
+
+	if got != want { t.Fatalf("got %q, want %q", got, want) }
+}
+
 //------------------------------------------------------------------------------
 // Negative Tests
 //------------------------------------------------------------------------------
