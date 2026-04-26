@@ -2,6 +2,11 @@ package ast
 
 import "testing"
 
+
+//------------------------------------------------------------------------------
+// Positive Tests
+//------------------------------------------------------------------------------
+
 func TestLeafToHTMLParagraph(t *testing.T) {
 	node := NewLeafNode("p", "Hello, world!", nil)
 
@@ -60,6 +65,11 @@ func TestLeafToHTMLImage(t *testing.T) {
 	if got != want { t.Fatalf("got %q, want %q", got, want) }
 	
 }
+
+
+//------------------------------------------------------------------------------
+// Negative Tests
+//------------------------------------------------------------------------------
 
 func TestLeafToHTMLErrorsWithoutValue(t *testing.T) {
 	node := NewLeafNode("p", "", nil)
