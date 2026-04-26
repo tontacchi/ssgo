@@ -1,6 +1,11 @@
 // Package ast
 package ast
 
+import (
+	"fmt"
+	"strings"
+)
+
 type HTMLNode struct {
 	Tag      string
 	Value    string
@@ -20,5 +25,19 @@ func NewHTMLNode(tag, value string,
 	}
 }
 
+func (n HTMLNode) toHTML() (string, error) {
+	return "", fmt.Errorf("toHTML not implemented for HTMLNode")
+}
 
+func (n HTMLNode) PropsToHTML() string {
+	if len(n.Props) == 0 { return "" }
+
+	var builder strings.Builder
+
+	for key, value := range n.Props {
+		fmt.Fprintf(&builder, ` %s="%s"`, key, value)
+	}
+
+	return builder.String()
+}
 
