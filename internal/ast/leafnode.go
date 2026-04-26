@@ -1,6 +1,15 @@
 package ast
 
-import "fmt"
+import (
+	"fmt"
+	"slices"
+	"sort"
+	"strings"
+)
+
+//------------------------------------------------------------------------------
+// LeafNode Definition
+//------------------------------------------------------------------------------
 
 type LeafNode struct {
 	Tag   string
@@ -16,6 +25,11 @@ func NewLeafNode(tag, value string, props map[string]string) LeafNode {
 	}
 }
 
+
+//------------------------------------------------------------------------------
+// Public API
+//------------------------------------------------------------------------------
+
 func (n LeafNode) ToHTML() (string, error) {
 	// guard: leaf must have a value
 	if n.Value == "" { return "", fmt.Errorf("leaf node must have a value") }
@@ -28,9 +42,28 @@ func (n LeafNode) ToHTML() (string, error) {
 }
 
 
-// helper functions
+//------------------------------------------------------------------------------
+// Helper Methods
+//------------------------------------------------------------------------------
 
 func propsToHTML(props map[string]string) string {
-	return ""
+	// guard: no key-value pairs to output
+	if len(props) == 0 { return "" }
+
+	// hack: sort a key slice for "ordered map" behavior
+	keys := make([]string, 0, len(props))
+	for key := range props {
+		keys = append(keys, key)
+	}
+	slices.Sort(keys)
+
+	var builder strings.Builder
+
+	// props always come after Tag name, so always has " " before all pairs
+	for _, key := range keys {
+		fmt.Fprintf(&builder, ` %s="%s"`, key, props[key])
+	}
+
+	return builder.String()
 }
 
