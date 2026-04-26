@@ -76,13 +76,25 @@ func TestLeafStringBasic(t *testing.T) {
 	if got != want { t.Fatalf("got %q, want %q", got, want) }
 }
 
-func TestLeafStringWithProps(t *testing.T) {
+func TestLeafStringWithOneProp(t *testing.T) {
 	node := NewLeafNode("a", "click", map[string]string{
 		"href": "https://example.com",
 	})
 
 	got  := node.String()
 	want := "LeafNode(a, click, map[href:https://example.com])"
+
+	if got != want { t.Fatalf("got %v, want %v", got, want) }
+}
+
+func TestLeafStringWithProps(t *testing.T) {
+	node := NewLeafNode("img", " ", map[string]string{
+		"src": "https://example.com/image",
+		"alt": "alt text",
+	})
+
+	got  := node.String()
+	want := "LeafNode(img,  , map[alt:alt text src:https://example.com/image])"
 
 	if got != want { t.Fatalf("got %v, want %v", got, want) }
 }
