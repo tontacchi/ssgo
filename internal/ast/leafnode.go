@@ -41,7 +41,25 @@ func (n LeafNode) ToHTML() (string, error) {
 }
 
 func (n LeafNode) String() string {
-	return fmt.Sprintf("LeafNode(%s, %s, %v)", n.Tag, n.Value, n.Props)
+	// guard: no props
+	if len(n.Props) == 0 {
+		return fmt.Sprintf("LeafNode(%s, %s, map[])", n.Tag, n.Value)
+	}
+
+	// sort keys, build sorted map output
+	keys := getSortedKeys(n.Props)
+	props := []string{}
+
+	for _, key := range keys {
+		pair := fmt.Sprintf("%s:%s", key, n.Props[key])
+		props = append(props, pair)
+	}
+
+	return fmt.Sprintf("LeafNode(%s, %s, map[%s])",
+		n.Tag,
+		n.Value,
+		strings.Join(props, " "),
+	)
 }
 
 
@@ -68,5 +86,16 @@ func propsToHTML(props map[string]string) string {
 	}
 
 	return builder.String()
+}
+
+func getSortedKeys(m map[string]string) []string {
+	keys := make([]string, 0, len(m))
+
+	for key := range m {
+		keys = append(keys, key)
+	}
+	slices.Sort(keys)
+
+	return keys
 }
 
