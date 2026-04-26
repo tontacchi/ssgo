@@ -46,6 +46,21 @@ func TestLeafToHTMLCode(t *testing.T) {
 	if got != want { t.Fatalf("got %q, want %q", got, want) }
 }
 
+func TestLeafToHTMLImage(t *testing.T) {
+	node := NewLeafNode("img", " ", map[string]string{
+		"src": "image.png",
+		"alt": "example image",
+	})
+
+	got, err := node.ToHTML()
+	if err != nil { t.Fatalf("Unexpected error: %v", err) }
+
+	// reminder: props are sorted by keys lexographically
+	want := `<img alt="example image" src="image.png"> </img>`	
+	if got != want { t.Fatalf("got %q, want %q", got, want) }
+	
+}
+
 func TestLeafToHTMLErrorsWithoutValue(t *testing.T) {
 	node := NewLeafNode("p", "", nil)
 
