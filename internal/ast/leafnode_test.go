@@ -87,6 +87,16 @@ func TestLeafStringWithProps(t *testing.T) {
 	if got != want { t.Fatalf("got %v, want %v", got, want) }
 }
 
+func TestLeafStringRawText(t *testing.T) {
+	node := NewLeafNode("", "plain text", nil)
+
+	got  := node.String()
+	want := "LeafNode(, plain text, map[])"
+
+	if got != want { t.Fatalf("got %v, want %v", got, want) }
+}
+
+
 //------------------------------------------------------------------------------
 // Negative Tests
 //------------------------------------------------------------------------------
