@@ -26,3 +26,13 @@ func TestLeafToHTMLAnchorWithProps(t *testing.T) {
 	if got != want { t.Fatalf("got %q, want %q", got, want) }
 } 
 
+func TestLeafToHTMLRawText(t *testing.T) {
+	node := NewLeafNode("", "raw text", nil)
+
+	got, err := node.ToHTML()
+	if err != nil { t.Fatalf("Unexpected error: %v", err) }
+
+	want := "raw text"
+	if got != want { t.Fatalf("got %q, want %q", got, want) }
+}
+
