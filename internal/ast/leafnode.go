@@ -14,3 +14,8 @@ func NewLeafNode(tag, value string, props map[string]string) LeafNode {
 	}
 }
 
+func (n LeafNode) ToHTML() (string, error) {
+	res := ""
+
+	return res, nil
+}
