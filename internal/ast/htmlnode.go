@@ -41,3 +41,13 @@ func (n HTMLNode) PropsToHTML() string {
 	return builder.String()
 }
 
+func (n HTMLNode) String() string {
+	return fmt.Sprintf(
+		"HTMLNode(%s, %s, %v, %v)",
+		n.Tag,
+		n.Value,
+		n.Children,
+		n.Props,
+	)
+}
+
