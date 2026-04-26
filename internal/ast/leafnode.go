@@ -1,5 +1,7 @@
 package ast
 
+import "fmt"
+
 type LeafNode struct {
 	Tag   string
 	Value string
@@ -15,7 +17,20 @@ func NewLeafNode(tag, value string, props map[string]string) LeafNode {
 }
 
 func (n LeafNode) ToHTML() (string, error) {
-	res := ""
+	// guard: leaf must have a value
+	if n.Value == "" { return "", fmt.Errorf("leaf node must have a value") }
 
+	// early: no tag -> just the value
+	if n.Tag == "" { return n.Value, nil }
+
+	res := fmt.Sprintf("<%s%s>%s<%s>", n.Tag, propsToHTML(n.Props), n.Value, n.Tag)
 	return res, nil
 }
+
+
+// helper functions
+
+func propsToHTML(props map[string]string) string {
+	return ""
+}
+
